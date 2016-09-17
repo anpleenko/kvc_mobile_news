@@ -71,7 +71,9 @@ $(function() {
           if (e.status == 404) {
             _this.done = true;
             _this.load = false;
-            _this.hidePreloader();
+
+            _this.hidePreloaderTop();
+            _this.hidePreloaderBottom()
           }
         }
       })
