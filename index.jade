@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+
+  title Document
+
+  link(rel="stylesheet", href="http://expoforum-center.ru/static/css/style.css")
+  link(rel="stylesheet", href="css/style.css")
+body
+
+  ul.clearfix#m-nav-tabs
+
+  .preloader-wrap-top
+    .preloader
+      span
+      span
+      span
+
+  #news-container
+  #temp
+
+  .preloader-wrap-bottom
+    .preloader
+      span
+      span
+      span
+
+
+  script(type="text/plain" id="tmpl_tabs")
+    |[[~it.tabs :value:index]]
+    |  <li
+    |    class="[[= it.current == value.id ? 'active' : '' ]]"
+    |    data-id="[[=value.id]]">[[=value.text]]</li>
+    |[[~]]
+
+
+  script(type="text/plain" id="tmpl_news")
+    .news-item
+      h3.news-title
+        a(href="[[=it.url]]") [[=it.title]]
+      p.news-time [[=it.created]]
+      p.news-text [[= it.short_content == '' ? it.content : it.short_content]]
+
+  script(src='https://code.jquery.com/jquery-3.1.0.min.js')
+  script(src='https://cdn.jsdelivr.net/dot.js/1.0.3/doT.min.js')
+  script(src='main.js')
+

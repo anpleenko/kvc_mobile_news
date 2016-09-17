@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="http://expoforum-center.ru/static/css/style.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <ul id="m-nav-tabs" class="clearfix"></ul>
+  <div class="preloader-wrap-top">
+    <div class="preloader"><span></span><span></span><span></span></div>
+  </div>
+  <div id="news-container"></div>
+  <div id="temp"></div>
+  <div class="preloader-wrap-bottom">
+    <div class="preloader"><span></span><span></span><span></span></div>
+  </div>
+  <script type="text/plain" id="tmpl_tabs">
+    [[~it.tabs :value:index]]
+     <li
+       class="[[= it.current == value.id ? 'active' : '' ]]"
+       data-id="[[=value.id]]">[[=value.text]]</li>
+    [[~]]
+  </script>
+  <script type="text/plain" id="tmpl_news">
+    <div class="news-item">
+      <h3 class="news-title"><a href="[[=it.url]]">[[=it.title]]</a></h3>
+      <p class="news-time">[[=it.created]]</p>
+      <p class="news-text">[[= it.short_content == '' ? it.content : it.short_content]]</p>
+    </div>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/dot.js/1.0.3/doT.min.js"></script>
+  <script src="main.js"></script>
+</body>
