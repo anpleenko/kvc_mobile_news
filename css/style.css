@@ -2,8 +2,7 @@ html, body {
   min-width: initial; }
 
 html {
-  -webkit-text-size-adjust: 100%;
-  /* Prevent font scaling in landscape while allowing user zoom */ }
+  -webkit-text-size-adjust: 100%; }
 
 #news-container {
   min-height: 100vh;

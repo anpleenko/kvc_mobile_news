@@ -3,49 +3,8 @@ html, body{
 }
 
 html {
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+  -webkit-text-size-adjust: 100%; // Prevent font scaling in landscape while allowing user zoom
 }
-
-// #pagination{
-//   // margin-top: 20px;
-//   display: table;
-//   margin: 20px auto;
-//   li{
-//     float: left;
-//     list-style: none;
-//     padding: 7px 16px;
-//     margin: 0 0 0 4px;
-//     background: #02589b;
-//     color: #ffffff;
-//     text-decoration: none;
-//     font-family: arial;
-//     font-weight: bold;
-//     border: 0 none;
-//     border-radius: 3px;
-//     box-shadow: 0 4px 0 #053861;
-//     cursor: pointer;
-
-//     @media(max-width: 768px){
-//       display: none;
-//     }
-
-//     &.active{
-//       background: #1883d6;
-//     }
-
-//     &.pagination-next{
-//       @media(max-width: 768px){
-//         display: block;
-//       }
-//     }
-
-//     &.pagination-prev{
-//       @media(max-width: 768px){
-//         display: block;
-//       }
-//     }
-//   }
-// }
 
 #news-container{
   min-height: 100vh;

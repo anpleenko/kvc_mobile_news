@@ -26,12 +26,7 @@ $.fn.tmpl = function(tmplId, data) {
   });
 };
 
-Array.prototype.last = function() {
-    return this[this.length-1];
-}
-
 $(function() {
-
   var tabs = [
     {
       text: 'О комплексе',
@@ -56,20 +51,18 @@ $(function() {
 
     getData: function(){
       var _this = this;
+      var params = {
+        page: this.page,
+        subjects__pk: this.currentTab
+      }
 
-      var tab = this.currentTab == 'all' ? '': 'subjects__pk=' + this.currentTab + '&';
+      if (this.currentTab == 'all') {
+        delete params['subjects__pk']
+      }
 
       $.ajax({
-        url: 'https://cors-anywhere.herokuapp.com/http://expoforum-center.ru/ru/news/api/list/?' + tab + 'page='+ _this.page,
-        error: function(e){
-          if (e.status == 404) {
-            _this.done = true;
-            _this.load = false;
-
-            _this.hidePreloaderTop();
-            _this.hidePreloaderBottom()
-          }
-        }
+        url: 'https://cors-anywhere.herokuapp.com/http://expoforum-center.ru/ru/news/api/list/',
+        data: params
       })
       .done(function(data) {
         $('#temp').tmpl('news', data.results);
@@ -85,6 +78,15 @@ $(function() {
 
         _this.hidePreloaderTop();
         _this.hidePreloaderBottom();
+      })
+      .fail(function(e){
+        if (e.status == 404) {
+          _this.done = true;
+          _this.load = false;
+
+          _this.hidePreloaderTop();
+          _this.hidePreloaderBottom()
+        }
       })
     },
     setEventToTabs: function(){
