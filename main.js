@@ -30,12 +30,6 @@ Array.prototype.last = function() {
     return this[this.length-1];
 }
 
-jQuery.ajaxPrefilter(function(options) {
-    if (options.crossDomain && jQuery.support.cors) {
-        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-    }
-});
-
 $(function() {
 
   var tabs = [
@@ -66,7 +60,7 @@ $(function() {
       var tab = this.currentTab == 'all' ? '': 'subjects__pk=' + this.currentTab + '&';
 
       $.ajax({
-        url: 'http://expoforum-center.ru/ru/news/api/list/?' + tab + 'page='+ _this.page,
+        url: 'https://cors-anywhere.herokuapp.com/http://expoforum-center.ru/ru/news/api/list/?' + tab + 'page='+ _this.page,
         error: function(e){
           if (e.status == 404) {
             _this.done = true;
