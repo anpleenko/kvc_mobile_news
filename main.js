@@ -27,7 +27,7 @@ $.fn.tmpl = function(tmplId, data) {
 };
 
 $(function() {
-  var tabs = [
+  const tabs = [
     {
       text: 'О комплексе',
       id: '7'
@@ -41,16 +41,15 @@ $(function() {
       text: 'Все',
       id: 'all'
     }
-  ]
+  ],
 
-  var app = {
+  app = {
     page: 1,
     currentTab: 7,
     load: true,
     done: false,
 
     getData: function(){
-      var _this = this;
       var params = {
         page: this.page,
         subjects__pk: this.currentTab
@@ -62,59 +61,55 @@ $(function() {
 
       $.ajax({
         url: 'https://cors-anywhere.herokuapp.com/http://expoforum-center.ru/ru/news/api/list/',
-        data: params
+        data: params,
       })
-      .done(function(data) {
+      .done((data) => {
         $('#temp').tmpl('news', data.results);
         $('#news-container').append($('#temp div'));
-        $('#temp').empty()
+        $('#temp').empty();
 
-        $('#m-nav-tabs').tmpl('tabs', {tabs: tabs, current: _this.currentTab});
+        $('#m-nav-tabs').tmpl('tabs', {tabs: tabs, current: this.currentTab});
 
-        _this.load = false;
+        this.load = false;
 
-        _this.setEventToTabs();
-        _this.setEventScroll();
+        this.setEventToTabs();
+        this.setEventScroll();
 
-        _this.hidePreloaderTop();
-        _this.hidePreloaderBottom();
+        this.hidePreloaderTop();
+        this.hidePreloaderBottom();
       })
-      .fail(function(e){
+      .fail((e) => {
         if (e.status == 404) {
-          _this.done = true;
-          _this.load = false;
+          this.done = true;
+          this.load = false;
 
-          _this.hidePreloaderTop();
-          _this.hidePreloaderBottom()
+          this.hidePreloaderTop();
+          this.hidePreloaderBottom();
         }
       })
     },
     setEventToTabs: function(){
-      var _this = this;
-      $('#m-nav-tabs li').on('click', function(){
-        _this.currentTab = $(this).data('id');
+      $('#m-nav-tabs li').on('click', (event) => {
+        this.currentTab = $(event.target).data('id');
+        this.done = false;
 
-        _this.done = false;
+        $('#news-container').empty();
+        this.page = 1;
 
-        $('#news-container').empty()
-        _this.page = 1;
-
-        _this.showPreloaderTop();
-        _this.getData();
+        this.showPreloaderTop();
+        this.getData();
       })
     },
     setEventScroll: function(){
-      var _this = this;
-
-      $(window).scroll(function () {
-        if (_this.load) return
-        if (_this.done) return
+      $(window).scroll(() => {
+        if (this.load) return;
+        if (this.done) return;
 
         if ($(document).height() - $(window).height() <= $(window).scrollTop() + 50) {
-          _this.load = true;
-          _this.page += 1;
-          _this.showPreloaderBottom();
-          _this.getData();
+          this.load = true;
+          this.page += 1;
+          this.showPreloaderBottom();
+          this.getData();
         }
       });
     },
@@ -130,10 +125,7 @@ $(function() {
     hidePreloaderBottom: function(){
       $('.preloader-wrap-bottom').hide();
     },
-    init: function(){
-      this.getData()
-    }
-  }
+  };
 
-  app.init()
+  app.getData();
 });
